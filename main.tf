@@ -24,8 +24,6 @@ provider "aws" {
 }
 
 
-
-
 variable "environment_type" {
     type = string
     default = "nothing"
