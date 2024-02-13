@@ -4,6 +4,7 @@ name: Terraform DEV CI/CD Cleanup
 on:
   delete:
     branches:
+      - "**"
       - "!main"
     paths:
       - "**.tf"
