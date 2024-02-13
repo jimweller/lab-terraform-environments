@@ -35,4 +35,3 @@ resource "aws_ssm_parameter" "foo" {
   value = var.environment_type
   description = "basic string  to see what terraform & GH are doing"
 }
-
