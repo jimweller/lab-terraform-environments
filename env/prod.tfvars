@@ -1,1 +1,1 @@
-environment_type="prod9"
+environment_type="pro10.5"

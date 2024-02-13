@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: TF Setup
         uses: hashicorp/setup-terraform@v3
       - name: Terraform Init
@@ -40,14 +42,16 @@ jobs:
         uses: aquasecurity/tfsec-pr-commenter-action@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          tfsec_args: --config-file .tfsec.yml 
+          tfsec_args: --config-file .tfsec.yml
       - name: TF documentation in README.md
         uses: terraform-docs/gh-actions@v1
         with:
           working-dir: .
           output-file: README.md
           output-method: inject
-          git-push: "true"      
+          git-push: "true"
+      - name: TF tagging (yor)
+        uses: bridgecrewio/yor-action@main
       - name: TF Apply
         run: terraform apply -auto-approve
         env:
