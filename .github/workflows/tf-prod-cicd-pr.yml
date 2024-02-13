@@ -1,3 +1,6 @@
+# Deploys a terraform infrastructure to !PRODUCTION! whenever
+# commits are pushed to main. This should *only* happen on PR merge
+# if the github repo is configured according to standards.
 name: Terraform CI/CD Pipeline
 on:
   push:
