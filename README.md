@@ -16,7 +16,10 @@ github actions.
   * AWS_PROD_SECRET - the AWS_SECRET_KEY for prod account
   * AWS_PROD_TFSTATE_S3 - the S3 bucket for terraform state for the prod account
 
- 
+ ## Actions Taken
+ * Any commits pushed to a non-`main` barnch will do `terraform` `init`, `validate`, `plan`, and `apply`  to DEV AWS
+* Deleting a non-`main` branch will do do `terraform destroy` to DEV AWS
+* Any commits pushed to main (merge PR) it does `terraform apply` to PROD AWS. E.g. when a PR is merged into `main`.
 
 ## References
 - https://nathan.kewley.me/2020-07-21-deploy-to-AWS-using-terraform-and-github-actions/
