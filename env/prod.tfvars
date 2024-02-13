@@ -1,1 +1,1 @@
-environment_type="pro11"
+environment_type="pro12"
