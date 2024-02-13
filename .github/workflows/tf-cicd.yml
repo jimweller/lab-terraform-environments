@@ -1,0 +1,75 @@
+on:
+    pull_request:
+      branches:
+        - dev
+  
+  jobs:
+    Terraform:
+      name: TF Plan
+      runs-on: ubuntu-latest
+      steps:
+  
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      
+      - name: TF Setup
+        uses: hashicorp/setup-terraform@v3
+  
+      - name: Terraform Init
+        run: terraform init
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TF_ACTION_WORKING_DIR: '.'
+          AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_DEV_KEY }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_DEV_SECRET }}
+          TF_CLI_ARGS: '-var-file="env/dev.tfvars" -backend-config="bucket=${{ secrets.AWS_DEV_TFSTATE_S3 }}" '
+  
+      - name: Terraform Validate
+        run: terraform validate 
+  
+      - name: Terraform Plan
+        run: terraform plan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TF_ACTION_WORKING_DIR: '.'
+          AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_DEV_KEY }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_DEV_SECRET }}
+          TF_CLI_ARGS: '-var-file="env/dev.tfvars"'
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  Terraform:
+    name: TF Apply
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout Repo
+      uses: actions/checkout@v4
+    
+    - name: TF Setup
+      uses: hashicorp/setup-terraform@v3
+
+    - name: TF Init
+      run: terraform init
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: '.'
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+        TF_CLI_ARGS: '-var-file="env/dev.tfvars" -backend-config="bucket=${{ secrets.STATE_BUCKET_DEV }}" '
+
+    - name: TF Validate
+      run: terraform validate 
+
+    - name: TF Apply
+      run: terraform apply -auto-approve
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: '.'
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+        TF_CLI_ARGS: '-var-file="env/dev.tfvars"'

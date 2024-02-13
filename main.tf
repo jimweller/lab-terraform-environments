@@ -8,6 +8,13 @@ terraform {
     }
 
     required_version = ">= 1.5.7"
+
+    backend "s3" {
+      # bucket name will be provided by env variable in CLI in GH action
+      # bucket = tfstate-926a3281efd27c72eaade2b820a5a164
+      key = "tf-environment-state-key"
+      region = "us-west-2"
+    }
 }
 
 # Configure the AWS Provider
