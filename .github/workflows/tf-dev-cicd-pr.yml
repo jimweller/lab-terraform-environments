@@ -37,7 +37,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEV_SECRET }}
           TF_CLI_ARGS: '-var-file="env/dev.tfvars"'
       - name: Terraform security checks (tfsec)
-        uses: aquasecurity/tfsec-pr-commenter-action@v1
+        uses: aquasecurity/tfsec-pr-commenter-action@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tfsec_args: --config-file .tfsec.yml 
