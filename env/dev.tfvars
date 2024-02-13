@@ -1,1 +1,1 @@
-environment_type="dev10.4"
+environment_type="dev10.5"
