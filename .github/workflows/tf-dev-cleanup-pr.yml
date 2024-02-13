@@ -1,8 +1,6 @@
 name: Terraform CI/CD Cleanup
 on:
-  pull_request:
-    types:
-      - closed
+  delete:
 jobs:
   plan:
     name: TF Dev Destroy
