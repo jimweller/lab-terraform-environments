@@ -10,9 +10,15 @@ terraform {
     required_version = ">= 1.5.7"
 
     backend "s3" {
+      bucket = "nothing"
       key = "tf-environment-state-key"
       region = "us-west-2"
     }
+}
+
+variable "environment_type" {
+    type = string
+    default = "dev"
 }
 
 # Configure the AWS Provider
@@ -24,7 +30,7 @@ provider "aws" {
 resource "aws_ssm_parameter" "foo" {
   name  = "environment"
   type  = "String"
-  value = var.environment.value
+  value = var.environment_type
   description = "basic value to see what terraform & GH are doing"
 }
 

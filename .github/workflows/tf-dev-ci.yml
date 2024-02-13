@@ -19,7 +19,7 @@ jobs:
           TF_ACTION_WORKING_DIR: '.'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEV_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEV_SECRET }}
-          TF_CLI_ARGS: '-var-file="env/dev.tfvars" -backend-config="bucket=${{ secrets.AWS_DEV_TFSTATE_S3 }}" '
+          TF_CLI_ARGS: '-var-file="env/dev.tfvars" -backend-config="bucket=${{ secrets.AWS_DEV_TFSTATE_S3 }}"'
       - name: Terraform Validate
         run: terraform validate
       - name: Terraform Plan
