@@ -1,6 +1,6 @@
 # Destroys terraform infrastructure in a dev environment any time a branch is
 # deleted (that is not "main")
-name: Terraform CI/CD Cleanup
+name: Terraform DEV CI/CD Cleanup
 on:
   delete:
     branches:

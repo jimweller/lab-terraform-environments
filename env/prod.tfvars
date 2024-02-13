@@ -1,1 +1,1 @@
-environment_type="prod5"
+environment_type="prod6"
