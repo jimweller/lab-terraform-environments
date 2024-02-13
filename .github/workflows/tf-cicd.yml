@@ -6,7 +6,7 @@ on:
         - dev
   
 jobs:
-    Terraform:
+    plan:
         name: TF Plan
         runs-on: ubuntu-latest
         steps:
@@ -44,7 +44,7 @@ on:
       - dev
 
 jobs:
-  Terraform:
+  apply:
     name: TF Apply
     runs-on: ubuntu-latest
     steps:
