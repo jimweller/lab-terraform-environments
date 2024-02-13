@@ -38,6 +38,8 @@ jobs:
           TF_CLI_ARGS: '-var-file="env/prod.tfvars"'
       - name: TF Validate
         run: terraform validate
+      - name: TF tagging (yor)
+        uses: bridgecrewio/yor-action@main
       - name: TF Apply
         run: terraform apply -auto-approve
         env:
