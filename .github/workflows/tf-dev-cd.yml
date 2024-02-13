@@ -1,4 +1,4 @@
-Name: TF CD
+name: TF CD
 on:
   push:
     branches:
