@@ -30,6 +30,8 @@ jobs:
           TF_CLI_ARGS: '-var-file="env/prod.tfvars" -backend-config="bucket=${{ secrets.AWS_PROD_TFSTATE_S3 }}"'
       - name: TF tagging (yor)
         uses: bridgecrewio/yor-action@main
+        env:
+          LOG_LEVEL: DEBUG
       - name: TF Apply
         run: terraform apply -auto-approve
         env:
