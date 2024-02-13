@@ -1,4 +1,6 @@
-# basic ssm param file
+# This simple TF pushes an SSM param to show that something happened int AWS via
+# the github action. The value of the environment_type paremeter will be
+# determined by the .tfvars files in the env directory.
 terraform {
     required_providers {
         aws = {
@@ -9,28 +11,31 @@ terraform {
 
     required_version = ">= 1.5.7"
 
+    # The bucket is not defined here. It comes from a github secret that is used
+    # on the tf command line in the GH actions.
     backend "s3" {
-      bucket = "nothing"
       key = "tf-environment-state-key"
       region = "us-west-2"
     }
 }
 
-variable "environment_type" {
-    type = string
-    default = "dev"
-}
-
-# Configure the AWS Provider
 provider "aws" {
   region = "us-west-2"
 }
 
 
+
+
+variable "environment_type" {
+    type = string
+    default = "nothing"
+}
+
+
 resource "aws_ssm_parameter" "foo" {
-  name  = "environment"
+  name  = "environment_type"
   type  = "String"
   value = var.environment_type
-  description = "basic value to see what terraform & GH are doing"
+  description = "basic string  to see what terraform & GH are doing"
 }
 
