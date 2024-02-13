@@ -36,8 +36,13 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEV_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEV_SECRET }}
           TF_CLI_ARGS: '-var-file="env/dev.tfvars"'
-      - uses: terraform-docs/gh-actions@v1
-        name: TF Docs
+      - name: Terraform security checks (tfsec)
+        uses: aquasecurity/tfsec-pr-commenter-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tfsec_args: --config-file .tfsec.yml 
+      - name: TF documentation in README.md
+        uses: terraform-docs/gh-actions@v1
         with:
           working-dir: .
           output-file: README.md
