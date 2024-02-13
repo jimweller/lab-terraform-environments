@@ -1,4 +1,4 @@
-# comment
+# basic ssm param file
 terraform {
     required_providers {
         aws = {
