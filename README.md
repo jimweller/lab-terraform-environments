@@ -24,3 +24,10 @@ github actions.
 ## References
 - https://nathan.kewley.me/2020-07-21-deploy-to-AWS-using-terraform-and-github-actions/
 - https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+
+
+
+
+<!-- BEGIN_TF_DOCS -->
+{{ .Content }}
+<!-- END_TF_DOCS -->
