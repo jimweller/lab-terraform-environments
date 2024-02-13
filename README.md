@@ -18,7 +18,7 @@ github actions.
 
  ## Actions Taken
  * Any commits pushed to a non-`main` branch will do `terraform` `init`, `validate`, `plan`, and `apply`  to DEV AWS
-* Deleting a non-`main` branch will do do `terraform destroy` to DEV AWS
+* Deleting a non-`main` branch will do `terraform destroy` to DEV AWS
 * Any commits pushed to `main` (merge PR) it does `terraform apply` to PROD AWS. E.g. when a PR is merged into `main`.
 
 ## References
