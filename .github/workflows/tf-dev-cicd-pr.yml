@@ -1,9 +1,14 @@
+# Deploys terraform infrastructure to a dev environment whenever commits are
+# pushed to any branch that is not "main"
 name: Terraform CI/CD Pipeline
 on:
   push:
     branches:
       - "**"
       - "!main"
+    paths:
+      - "**.tf"
+      - "**.tfvars"
 jobs:
   plan:
     name: TF Dev Apply

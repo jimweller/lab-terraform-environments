@@ -5,6 +5,9 @@ on:
   delete:
     branches:
       - "!master"
+    paths:
+      - "**.tf"
+      - "**.tfvars"
 jobs:
   destroy:
     name: TF Dev Destroy
