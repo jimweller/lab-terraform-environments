@@ -1,0 +1,44 @@
+name: Terraform CI
+on:
+  pull_request:
+    types: [opened, reopened, edited]
+
+jobs:
+  plan:
+    name: TF Plan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: TF Setup
+        uses: hashicorp/setup-terraform@v3
+      - name: Terraform Init
+        run: terraform init
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TF_ACTION_WORKING_DIR: '.'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEV_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEV_SECRET }}
+          TF_CLI_ARGS: '-var-file="env/dev.tfvars" -backend-config="bucket=${{ secrets.AWS_DEV_TFSTATE_S3 }}"'
+      - name: Terraform Validate
+        run: terraform validate
+      - name: Terraform Plan
+        run: terraform plan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TF_ACTION_WORKING_DIR: '.'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEV_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEV_SECRET }}
+          TF_CLI_ARGS: '-var-file="env/dev.tfvars"'
+
+      - name: TF Validate
+        run: terraform validate
+
+      - name: TF Apply
+        run: terraform apply -auto-approve
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TF_ACTION_WORKING_DIR: '.'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEV_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEV_SECRET }}
+          TF_CLI_ARGS: '-var-file="env/dev.tfvars"'
