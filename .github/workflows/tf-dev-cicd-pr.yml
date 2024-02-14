@@ -26,6 +26,8 @@ jobs:
     name: Infrastructure Jobs (dev)
     runs-on: ubuntu-latest
     steps:
+
+      # checkout the repo (shallow)
       - name: Checkout Repo
         uses: actions/checkout@v4
 

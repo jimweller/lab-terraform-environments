@@ -17,6 +17,8 @@ jobs:
     name: TF Cleanup (dev)
     runs-on: ubuntu-latest
     steps:
+    
+      # check out the repo (shallow)
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: TF Setup

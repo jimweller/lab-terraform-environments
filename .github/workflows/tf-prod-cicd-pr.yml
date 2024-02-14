@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      # checkout the repo (complete, not shallow, for yor's blame checking)
       - name: Checkout Repo
         uses: actions/checkout@v4
         with:
