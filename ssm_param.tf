@@ -35,4 +35,15 @@ resource "aws_ssm_parameter" "environment_type" {
   value       = var.environment_type
   description = "basic string  to see what terraform & GH are doing"
   # tags will be injected here by yor
+  tags = {
+    CostCenter      = "CC5409"
+    CustomerName    = "Hyland Software Inc"
+    EnvironmentType = "Production"
+    Owner           = "CPEENBL"
+    Platform        = "AWS Delivery"
+    Product         = "OnBase"
+    source          = "yor"
+    yor_name        = "environment_type"
+    yor_trace       = "44463cde-396e-4882-936c-4efa37fdb87d"
+  }
 }
