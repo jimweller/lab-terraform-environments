@@ -1,1 +1,1 @@
-environment_type="1"
+environment_type="2"
