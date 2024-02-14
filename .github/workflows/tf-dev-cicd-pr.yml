@@ -1,11 +1,11 @@
-# Deploys terraform infrastructure to a DEV environment whenever commits are
-# pushed to any branch that is not "main"
-# name: Terraform DEV CI/CD Pipeline
+# Deploys terraform infrastructure to a DEV environment whenever a PR is opened
+# off of main
+name: Terraform DEV CI/CD Pipeline
 on:
   push:
-    branches:
-      - "**"
-      - "!main"
+  pull_request:
+    branches: 
+      - main
     paths:
       - "**.tf"
       - "**.tfvars"
