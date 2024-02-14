@@ -5,7 +5,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"
+      version = "~> 4.0"
     }
   }
 
@@ -32,7 +32,7 @@ variable "environment_type" {
 resource "aws_ssm_parameter" "environment_type" {
   name        = "environment_type"
   type        = "String"
-  value       = "3" #var.environment_type
+  value       = "4" #var.environment_type
   description = "basic string  to see what terraform & GH are doing"
   tags = {
     CostCenter           = "CC5409"
