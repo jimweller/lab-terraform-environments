@@ -50,6 +50,7 @@ gh pr merge -s -d wf$num
 
 # switch to main and delete local/remote branches
 gco main
+gl
 gpod wf$num
 gbD wf$num
 
