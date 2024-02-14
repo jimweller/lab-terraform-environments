@@ -24,15 +24,15 @@ provider "aws" {
   region = "us-west-2"
 }
 
-variable "environment_type" {
-  type    = string
-  default = "nothing"
-}
+#variable "environment_type" {
+#  type    = string
+#  default = "nothing"
+#}
 
 resource "aws_ssm_parameter" "environment_type" {
   name        = "environment_type"
   type        = "String"
-  value       = "4" #var.environment_type
+  value       = "5" #var.environment_type
   description = "basic string  to see what terraform & GH are doing"
   tags = {
     CostCenter           = "CC5409"
