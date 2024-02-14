@@ -1,1 +1,1 @@
-environment_type="dev3"
+environment_type="1"
