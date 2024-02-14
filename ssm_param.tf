@@ -5,11 +5,11 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "~> 5.0"
     }
   }
 
-  required_version = ">= 1.5.7"
+  required_version = "~= 1.5"
 
   # The bucket is not defined here. It will vary depending on dev or prod
   # environment. It comes from a github secret that is used on the tf command
