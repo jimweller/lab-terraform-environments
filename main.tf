@@ -36,14 +36,14 @@ resource "aws_ssm_parameter" "environment_type" {
   description = "basic string  to see what terraform & GH are doing"
   tags = {
     git_commit           = "69708264fabf702b7ae06f23eb874057a839524d"
-    git_file             = "69708264fabf702b7ae06f23eb874057a839524d"
-    git_last_modified_at = "69708264fabf702b7ae06f23eb874057a839524d"
-    git_last_modified_by = "69708264fabf702b7ae06f23eb874057a839524d"
-    git_modifiers        = "69708264fabf702b7ae06f23eb874057a839524d"
-    git_org              = "69708264fabf702b7ae06f23eb874057a839524d"
-    git_repo             = "69708264fabf702b7ae06f23eb874057a839524d"
-    yor_trace            = "69708264fabf702b7ae06f23eb874057a839524d"
-    yor_trace            = "69708264fabf702b7ae06f23eb874057a839524d"
+    git_file             = "main.tf"
+    git_last_modified_at = "main.tf"
+    git_last_modified_by = "main.tf"
+    git_modifiers        = "main.tf"
+    git_org              = "jimweller"
+    git_repo             = "jimweller"
+    yor_trace            = "jimweller"
+    yor_trace            = "jimweller"
     yor_name             = "environment_type"
   }
 }
