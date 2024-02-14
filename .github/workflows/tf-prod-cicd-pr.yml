@@ -13,7 +13,7 @@ jobs:
   # this is the part that makes the workflow run ONLY on a PR merge, not just a
   # push to main
   tf-prod-cicd:
-  if: ${{ github.event.pull_request.merged }}
+    if: ${{ github.event.pull_request.merged }}
     name: Infrastructure Jobs (prod)
     runs-on: ubuntu-latest
     steps:
