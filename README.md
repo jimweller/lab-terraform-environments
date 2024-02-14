@@ -48,12 +48,6 @@ gh pr merge -s -d wf$num
 # [watch the tf-dev-cleanup-pr.yml and tf-prod-cicd-pr.yml workflows run]
 # [see the ssm paramenter is in aws prod and was destroyed in aws dev]
 
-# switch to main and delete local/remote branches
-gco main
-gl
-gpod wf$num
-gbD wf$num
-
 # !IMPORTANT! yor moved your branch ahead by one commit. So, locally
 # you need to do a git pull to get caught up to that change before you 
 # modify any other files
