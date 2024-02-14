@@ -38,7 +38,7 @@ resource "aws_ssm_parameter" "environment_type" {
   type        = "String"
   value       = local.current_datetime #var.environment_type
   description = "basic string  to see what terraform & GH are doing"
-  # tags will be injected here by yor
+  # tags will be injected here by yor 1
 
   tags = {
     CostCenter           = "CC5409"
