@@ -41,15 +41,15 @@ resource "aws_ssm_parameter" "environment_type1" {
     Owner                = "CPEENBL"
     Platform             = "AWS Delivery"
     Product              = "OnBase"
-    git_commit           = "62db65792452d6b9c935b1d2a9577554bec5744c"
+    git_commit           = "956f86fa9b26ceaf186fa05b19c12cb718339bf0"
     git_file             = "ssm_param.tf"
-    git_last_modified_at = "2024-02-14 07:17:35"
+    git_last_modified_at = "2024-02-14 07:21:07"
     git_last_modified_by = "jim.weller@gmail.com"
     git_modifiers        = "jim.weller"
     git_org              = "jimweller"
     git_repo             = "tf-envs"
     source               = "yor"
-    yor_name             = "environment_type"
+    yor_name             = "environment_type1"
     yor_trace            = "9480d18a-6909-4291-aeff-2430996b85fe"
   }
 }
