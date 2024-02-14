@@ -1,7 +1,7 @@
 # Deploys a terraform infrastructure to !PRODUCTION! whenever
 # commits are pushed to main. This should *only* happen on PR merge
 # if the github repo is configured according to standards.
-name: Terraform PROD CI/CD Pipeline
+name: yor
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
