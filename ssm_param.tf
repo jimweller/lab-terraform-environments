@@ -34,7 +34,7 @@ resource "aws_ssm_parameter" "environment_type" {
   type        = "String"
   value       = var.environment_type
   description = "basic string  to see what terraform & GH are doing"
-  # tags will be injected here by yor 1
+  # tags will be injected here by yor 2
   tags = {
     CostCenter           = "CC5409"
     CustomerName         = "Hyland Software Inc"

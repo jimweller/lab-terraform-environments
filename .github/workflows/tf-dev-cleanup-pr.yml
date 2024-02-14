@@ -1,5 +1,5 @@
 # Destroys terraform infrastructure in a dev environment any time a branch is
-# deleted (that is not "main")
+# deleted (that is not "main"), e.g. when a PR is merged
 name: Terraform DEV CI/CD Cleanup
 on:
   delete:
