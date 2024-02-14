@@ -21,6 +21,39 @@ github actions.
 * Deleting a non-`main` branch will do `terraform destroy` to DEV AWS
 * Any commits pushed to `main` (merge PR) it does `terraform apply` to PROD AWS. E.g. when a PR is merged into `main`.
 
+## Testing
+
+```
+# generate a unique number for branch, commit message, and PR
+num=`date +%s`
+
+# change something in ssm_parm.tf or a *.tfvars file, like edit a comment
+
+# create a branch
+gcb wf$num
+
+# commit & push
+gav . && gcmsg "$num" && ggpush
+
+# [nothing should happen since the triggers are all PR based]
+
+# create a PR
+gh pr create -t "wf$num" -b "$num"
+
+# [watch the tf-dev-cicd-pr.yml worklow run and create an SSM parameter in your aws dev account]
+
+# merge the PR (squash and delete branch)
+gh pr merge -s -d wf$num
+
+# [watch the tf-dev-cleanup-pr.yml and tf-prod-cicd-pr.yml workflows run]
+# [see the ssm paramenter is in aws prod and was destroyed in aws dev]
+
+# !IMPORTANT! yor moved your branch ahead by one commit. So, locally
+# you need to do a git pull to get caught up to that change before you 
+# modify any other files
+gl
+```
+
 ## References
 - https://nathan.kewley.me/2020-07-21-deploy-to-AWS-using-terraform-and-github-actions/
 - https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
