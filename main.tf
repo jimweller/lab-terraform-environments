@@ -29,7 +29,7 @@ variable "environment_type" {
   default = "nothing"
 }
 
-resource "aws_ssm_parameter" "foo" {
+resource "aws_ssm_parameter" "environment_type" {
   name        = "environment_type"
   type        = "String"
   value       = var.environment_type
