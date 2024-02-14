@@ -1,1 +1,1 @@
-environment_type="dev""
+environment_type="dev"
