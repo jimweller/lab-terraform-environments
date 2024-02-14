@@ -48,6 +48,8 @@ resource "aws_ssm_parameter" "environment_type" {
   value       = var.environment_type
   description = "A basic SSM parameter that will vary between DEV and PROD aws accounts according to the tfvars files in the env/ directory."
   # tags will be injected below  here by yor
+  # you can use the tag ChangeMeToTest to force the resource
+  # to update in dev. See tf-dev-cicd.yml
   tags = {
     ChangeMeToTest       = "1"
     CostCenter           = "CC5409"
