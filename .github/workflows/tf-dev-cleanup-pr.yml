@@ -1,24 +1,27 @@
 # Destroys terraform infrastructure in a dev environment any time that a branch
-# is deleted (that is not "main"), e.g. when a PR is merged
-name: Terraform DEV CI/CD Cleanup
+# is deleted (that is not "main"), e.g. when a PR is merged or a dev branch is
+# deleted on the remote
+name: DEV Terraform CI/CD Cleanup
 on:
   delete:
+    # run for any branch deletion except main
     branches:
       - "**"
       - "!main"
+    # only if TF files change
     paths:
       - "**.tf"
       - "**.tfvars"
 jobs:
   tf-dev-cleanup-pr:
-    name: TF Dev Destroy
+    name: TF Cleanup (dev)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: TF Setup
         uses: hashicorp/setup-terraform@v3
-      - name: Terraform Init
+      - name: TF Init
         run: terraform init
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,6 +1,6 @@
 # Deploys terraform infrastructure to a DEV environment whenever a PR is opened
 # off of main
-name: Terraform DEV CI/CD Pipeline
+name: DEV Terraform CI/CD Pipeline
 on:
   pull_request:
     branches: 

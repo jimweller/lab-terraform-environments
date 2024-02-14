@@ -1,15 +1,12 @@
 # Deploys a terraform infrastructure to !PRODUCTION! whenever a PR is merged
-name: Terraform PROD CI/CD Pipeline
+# Not
+name: PROD Terraform CI/CD Pipeline
 on:
-  # Triggers the workflow on PR but only for the main
-  # branch and only for files that merit running terraform.
-  # and only if it the PR is merged (see IF below)
-#   pull_request:
-#     types:
-#       - closed
   push:
+    # only on pushes to main
     branches:
       - "main"
+    # only if TF files changes
     paths:
       - "**.tf"
       - "**.tfvars"
@@ -17,7 +14,6 @@ jobs:
   tf-prod-cicd:
     # this is the part that makes the workflow run ONLY on a PR merge, not just a
     # push to main
-    #if: github.event.pull_request.merged == true
     name: Infrastructure Jobs (prod)
     runs-on: ubuntu-latest
     steps:
@@ -39,10 +35,10 @@ jobs:
           parsers: Terraform
           config_file: .tag_config.yml
 
-      - name: TF Setup
+      - name: TF Setup (prod)
         uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform Init
+      - name: TF Init (prod)
         run: terraform init
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -51,10 +47,10 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PROD_SECRET }}
           TF_CLI_ARGS: '-var-file="env/prod.tfvars" -backend-config="bucket=${{ secrets.AWS_PROD_TFSTATE_S3 }}"'
 
-      - name: Terraform Validate
+      - name: TF Validate (prod)
         run: terraform validate
 
-      - name: Terraform Plan
+      - name: TF Plan (prod)
         run: terraform plan
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -63,7 +59,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PROD_SECRET }}
           TF_CLI_ARGS: '-var-file="env/prod.tfvars"'
 
-      - name: TF Apply
+      - name: TF Apply (prod)
         run: terraform apply -auto-approve
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
