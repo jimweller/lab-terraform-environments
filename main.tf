@@ -30,16 +30,16 @@ variable "environment_type" {
 }
 
 resource "aws_ssm_parameter" "environment_type" {
-  name        = "environment_type21"
+  name        = "environment_type22"
   type        = "String"
   value       = var.environment_type
   description = "basic string  to see what terraform & GH are doing"
   tags = {
     jim                  = "c"
-    git_commit           = "5dcd6066b50c7847fb7c67792c360e873c873c91"
+    git_commit           = "56b376b9d7fce70ea180c6f1595ba7dd0bb9291c"
     git_file             = "main.tf"
-    git_last_modified_at = "2024-02-14 04:59:29"
-    git_last_modified_by = "31997291+jimweller@users.noreply.github.com"
+    git_last_modified_at = "2024-02-14 05:01:06"
+    git_last_modified_by = "jim.weller@gmail.com"
     git_modifiers        = "31997291+jimweller/jim.weller"
     git_org              = "jimweller"
     git_repo             = "tf-envs"
