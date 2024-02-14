@@ -9,7 +9,7 @@ on:
       - "**.tf"
       - "**.tfvars"
 jobs:
-  terraform:
+  tf-dev-cicd-pr:
     name: Infrastructure Jobs (dev)
     runs-on: ubuntu-latest
     steps:

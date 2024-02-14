@@ -17,7 +17,7 @@ on:
     types: 
       - closed
 jobs:
-  destroy:
+  tf-dev-cleanup-pr:
     name: TF Dev Destroy
     runs-on: ubuntu-latest
     steps:
