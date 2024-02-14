@@ -1,1 +1,1 @@
-environment_type=timestamp()
+environment_type="prod"
