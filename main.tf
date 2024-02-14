@@ -37,13 +37,13 @@ resource "aws_ssm_parameter" "environment_type" {
   tags = {
     git_commit           = "69708264fabf702b7ae06f23eb874057a839524d"
     git_file             = "main.tf"
-    git_last_modified_at = "main.tf"
-    git_last_modified_by = "main.tf"
-    git_modifiers        = "main.tf"
+    git_last_modified_at = "2024-02-14 00:41:18"
+    git_last_modified_by = "2024-02-14 00:41:18"
+    git_modifiers        = "2024-02-14 00:41:18"
     git_org              = "jimweller"
-    git_repo             = "jimweller"
-    yor_trace            = "jimweller"
-    yor_trace            = "jimweller"
+    git_repo             = "tf-envs"
+    yor_trace            = "tf-envs"
+    yor_trace            = "tf-envs"
     yor_name             = "environment_type"
   }
 }
