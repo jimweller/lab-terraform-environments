@@ -11,35 +11,41 @@ terraform {
 
   required_version = "~> 1.5"
 
-  # The bucket is not defined here. It will vary depending on dev or prod
-  # environment. It comes from a github secret that is used on the tf command
-  # line in the GH actions.
+  # The bucket is not defined here on purpose. It will vary depending on dev or
+  # prod environment. It comes from a github secret that is used on the tf
+  # command line in the GH actions.
   backend "s3" {
     key    = "tf-environment-state-key"
     region = "us-west-2"
   }
 }
 
-locals {
-  current_datetime = timestamp()
-}
-
 provider "aws" {
   region = "us-west-2"
 }
 
+# This variable is used to change the value of the ssm parameter between dev and
+# prod. See the tfvars files in the env/ directory.
 variable "environment_type" {
   type    = string
   default = "nothing"
+  description = "This variable is used to change the value of the ssm parameter between dev and prod. See the tfvars files in the env/ directory."
 }
 
+# This is the most basic terraform resource, a key and value in the SSM
+# parameter store. It is a fast and easy way to test other things like github
+# actions and other tooling.
+#
+# Note, that the tags will be populated by yor 
+#
+# Note, that the value comes from a variable assigned in the tfvars files in the
+# env/ directory
 resource "aws_ssm_parameter" "environment_type" {
   name        = "environment_type"
   type        = "String"
-  value       = local.current_datetime #var.environment_type
-  description = "basic string  to see what terraform & GH are doing"
-  # tags will be injected here by yor
-
+  value       = var.environment_type
+  description = "A basic SSM parameter that will vary between DEV and PROD aws accounts according to the tfvars files in the env/ directory."
+  # tags will be injected below  here by yor
   tags = {
     ChangeMeToTest       = "1"
     CostCenter           = "CC5409"
