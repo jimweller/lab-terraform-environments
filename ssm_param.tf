@@ -27,8 +27,8 @@ provider "aws" {
 # This variable is used to change the value of the ssm parameter between dev and
 # prod. See the tfvars files in the env/ directory.
 variable "environment_type" {
-  type    = string
-  default = "nothing"
+  type        = string
+  default     = "nothing"
   description = "This variable is used to change the value of the ssm parameter between dev and prod. See the tfvars files in the env/ directory."
 }
 
@@ -54,10 +54,10 @@ resource "aws_ssm_parameter" "environment_type" {
     Owner                = "CPEENBL"
     Platform             = "AWS Delivery"
     Product              = "OnBase"
-    git_commit           = "1aaf5e9de011260acaa668b91f6d3dc38cab29ac"
+    git_commit           = "51047752fb8d8cad8ec0ddbd8973b82f78b4d37f"
     git_file             = "ssm_param.tf"
-    git_last_modified_at = "2024-02-14 19:31:31"
-    git_last_modified_by = "31997291+jimweller@users.noreply.github.com"
+    git_last_modified_at = "2024-02-14 19:45:07"
+    git_last_modified_by = "jim.weller@gmail.com"
     git_modifiers        = "31997291+jimweller/jim.weller"
     git_org              = "jimweller"
     git_repo             = "tf-envs"
