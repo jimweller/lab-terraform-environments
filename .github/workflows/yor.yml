@@ -1,0 +1,34 @@
+# Deploys a terraform infrastructure to !PRODUCTION! whenever
+# commits are pushed to main. This should *only* happen on PR merge
+# if the github repo is configured according to standards.
+name: Terraform PROD CI/CD Pipeline
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
+#   push:
+#     branches:
+#       - "main"
+#     paths:
+#       - "**.tf"
+#       - "**.tfvars"
+jobs:
+  plan:
+    name: TF Prod Apply
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: TF tagging (yor)
+        uses: bridgecrewio/yor-action@main
+#        env:
+#          LOG_LEVEL: DEBUG
+        with:
+          parsers: Terraform
+          config_file: .tag_config.yml
