@@ -5,19 +5,25 @@ on:
   # branch and only for files that merit running terraform.
   # and only if it the PR is merged (see IF below)
   pull_request:
+    types:
+      - closed
     branches:
       - "main"
     paths:
       - "**.tf"
       - "**.tfvars"
 jobs:
-  # this is the part that makes the workflow run ONLY on a PR merge, not just a
-  # push to main
   tf-prod-cicd:
-    if: ${{ github.event.pull_request.merged }}
+    # this is the part that makes the workflow run ONLY on a PR merge, not just a
+    # push to main
+    if: github.event.pull_request.merged == true
     name: Infrastructure Jobs (prod)
     runs-on: ubuntu-latest
     steps:
+    #   - name: Jim DEBUG
+    #     run: |
+    #       echo DEBUG
+    #       echo "${{ github.event.pull_request.merged }} : " ${{ github.event.pull_request.merged }}
       - name: Checkout Repo
         uses: actions/checkout@v4
         with:
