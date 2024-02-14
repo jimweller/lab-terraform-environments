@@ -25,8 +25,16 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
 
+      - name: TF tagging (yor)
+        uses: bridgecrewio/yor-action@main
+#        env:
+#          LOG_LEVEL: DEBUG
+        with:
+          parsers: Terraform
+
       - name: TF Setup
         uses: hashicorp/setup-terraform@v3
+
       - name: Terraform Init
         run: terraform init
         env:
@@ -35,8 +43,10 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PROD_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PROD_SECRET }}
           TF_CLI_ARGS: '-var-file="env/prod.tfvars" -backend-config="bucket=${{ secrets.AWS_PROD_TFSTATE_S3 }}"'
+
       - name: Terraform Validate
         run: terraform validate
+
       - name: Terraform Plan
         run: terraform plan
         env:
@@ -45,12 +55,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PROD_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PROD_SECRET }}
           TF_CLI_ARGS: '-var-file="env/prod.tfvars"'
-      - name: TF tagging (yor)
-        uses: bridgecrewio/yor-action@main
-#        env:
-#          LOG_LEVEL: DEBUG
-        with:
-          parsers: Terraform
+
       - name: TF Apply
         run: terraform apply -auto-approve
         env:
