@@ -29,10 +29,10 @@ provider "aws" {
 #  default = "nothing"
 #}
 
-resource "aws_ssm_parameter" "environment_type2" {
-  name        = "environment_type2"
+resource "aws_ssm_parameter" "environment_type3" {
+  name        = "environment_type3"
   type        = "String"
-  value       = "13" #var.environment_type
+  value       = "14" #var.environment_type
   description = "basic string  to see what terraform & GH are doing"
   tags = {
     CostCenter           = "CC5409"
