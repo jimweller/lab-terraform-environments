@@ -1,11 +1,11 @@
 # Deploys terraform infrastructure to a DEV environment whenever a non-main
-# branch receives a push this allows you to continually update a branch and see
+# branch receives a push. This allows you to continually update a branch and see
 # the terraform being applied in a dev aws account
 #
-# This is considered a test pipeline. Maning that you can use it as a status
+# This is considered a test pipeline. Meaning that you can use it as a status
 # check for branch protection rules. If this pipeline runs successfully and you
-# are happy with the results in the dev AWS account, then it is considered
-# successfully tested for the purpose of merging a PR.
+# are happy with the results in the dev AWS account, then the change is
+# considered successfully tested for the purpose of merging a PR.
 #
 # Note, before you can push to main, you'll need to do a PR with the working
 # branch per team git standards. But you can keep tweaking the branch with new

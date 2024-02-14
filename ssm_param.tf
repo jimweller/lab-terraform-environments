@@ -1,6 +1,8 @@
 # This simple TF pushes an SSM param to show that something happened in AWS via
 # the github action. The value of the environment_type paremeter will be
 # determined by the .tfvars files in the env directory.
+
+
 terraform {
   required_providers {
     aws = {

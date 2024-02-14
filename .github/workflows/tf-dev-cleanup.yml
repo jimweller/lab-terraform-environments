@@ -21,8 +21,14 @@ jobs:
       # check out the repo (shallow)
       - name: Checkout Repo
         uses: actions/checkout@v4
+
+      # Setup terraform using the hashicorp action. This just install terraform
+      # into the temporary working space.
       - name: TF Setup
         uses: hashicorp/setup-terraform@v3
+
+      # Initialize terraform modules, etc. Note that it is using the AWS credentials stored in the github
+      # secrets.
       - name: TF Init
         run: terraform init
         env:
@@ -31,6 +37,8 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEV_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEV_SECRET }}
           TF_CLI_ARGS: '-var-file="env/dev.tfvars" -backend-config="bucket=${{ secrets.AWS_DEV_TFSTATE_S3 }}"'
+
+      # Destroy the resources in the AWS dev environment.
       - name: TF Destroy
         run: terraform destroy -auto-approve
         env:
