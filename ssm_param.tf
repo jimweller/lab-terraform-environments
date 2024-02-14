@@ -34,7 +34,7 @@ resource "aws_ssm_parameter" "environment_type" {
   type        = "String"
   value       = var.environment_type
   description = "basic string  to see what terraform & GH are doing"
-  # tags will be injected here by yor
+  # tags will be injected here by yor 1
   tags = {
     CostCenter           = "CC5409"
     CustomerName         = "Hyland Software Inc"
@@ -45,9 +45,9 @@ resource "aws_ssm_parameter" "environment_type" {
     source               = "yor"
     yor_name             = "environment_type"
     yor_trace            = "44463cde-396e-4882-936c-4efa37fdb87d"
-    git_commit           = "42059481a53df519c7dc8080d82faaf846c75e5a"
+    git_commit           = "efdd568cd666f816b762360f30f0bfc4c4d82a5d"
     git_file             = "ssm_param.tf"
-    git_last_modified_at = "2024-02-14 15:43:20"
+    git_last_modified_at = "2024-02-14 15:57:19"
     git_last_modified_by = "jim.weller@gmail.com"
     git_modifiers        = "jim.weller"
     git_org              = "jimweller"
