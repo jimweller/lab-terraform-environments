@@ -23,6 +23,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
     #   - name: TF Setup
     #     uses: hashicorp/setup-terraform@v3
     #   - name: Terraform Init
