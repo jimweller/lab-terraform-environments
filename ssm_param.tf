@@ -35,6 +35,4 @@ resource "aws_ssm_parameter" "environment_type" {
   value       = var.environment_type
   description = "basic string  to see what terraform & GH are doing"
   # tags will be injected here by yor
-
-
 }
