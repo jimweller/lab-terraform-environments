@@ -35,6 +35,7 @@ resource "aws_ssm_parameter" "environment_type" {
   value       = var.environment_type
   description = "basic string  to see what terraform & GH are doing"
   tags = {
+    jim="a"
     git_commit           = "69708264fabf702b7ae06f23eb874057a839524d"
     git_file             = "main.tf"
     git_last_modified_at = "2024-02-14 00:41:18"
