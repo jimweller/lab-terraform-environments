@@ -1,0 +1,26 @@
+tag_groups:
+  - name: basics
+    tags:
+      - name: source
+        value:
+          default: "yor"
+  - name: cpe-tags
+    tags:
+      - name: Product
+        value:
+          default: "OnBase"
+      - name: CostCenter
+        value:
+          default: "CC5409"
+      - name: EnvironmentType
+        value:
+          default: "Production"
+      - name: Platform
+        value:
+          default: "AWS Delivery"
+      - name: CustomerName
+        value:
+          default: "Hyland Software Inc"
+      - name: Owner
+        value:
+          default: "CPEENBL"

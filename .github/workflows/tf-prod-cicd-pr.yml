@@ -31,6 +31,7 @@ jobs:
 #          LOG_LEVEL: DEBUG
         with:
           parsers: Terraform
+          config_file: .tag_config.yml
 
       - name: TF Setup
         uses: hashicorp/setup-terraform@v3
