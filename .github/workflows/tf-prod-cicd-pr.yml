@@ -1,9 +1,7 @@
-# Deploys a terraform infrastructure to !PRODUCTION! whenever
-# commits are pushed to main. This should *only* happen on PR merge
-# if the github repo is configured according to standards.
+# Deploys a terraform infrastructure to !PRODUCTION! whenever a PR is merged
 name: Terraform PROD CI/CD Pipeline
 on:
-  # Triggers the workflow on push or pull request events but only for the main
+  # Triggers the workflow on push but only for the main
   # branch and only for files that merit running terraform.
   push:
     branches:
@@ -12,6 +10,9 @@ on:
       - "**.tf"
       - "**.tfvars"
 jobs:
+  # this is the part that makes the workflow run ONLY on a PR merge, not just a
+  # push to main
+  if: ${{ github.event.pull_request.merged }}
   plan:
     name: Infrastructure Jobs (prod)
     runs-on: ubuntu-latest
