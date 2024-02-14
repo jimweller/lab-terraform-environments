@@ -29,29 +29,10 @@ variable "environment_type" {
   default = "nothing"
 }
 
-resource "aws_ssm_parameter" "environment_type3" {
+resource "aws_ssm_parameter" "environment_type" {
   name        = "environment_type"
   type        = "String"
   value       = var.environment_type
   description = "basic string  to see what terraform & GH are doing"
   # tags will be injected here by yor
-
-  tags = {
-    CostCenter           = "CC5409"
-    CustomerName         = "Hyland Software Inc"
-    EnvironmentType      = "Production"
-    Owner                = "CPEENBL"
-    Platform             = "AWS Delivery"
-    Product              = "OnBase"
-    git_commit           = "e61ad26b8a4ae063f18150f0b9fbd67d982011d4"
-    git_file             = "ssm_param.tf"
-    git_last_modified_at = "2024-02-14 15:38:07"
-    git_last_modified_by = "jim.weller@gmail.com"
-    git_modifiers        = "jim.weller"
-    git_org              = "jimweller"
-    git_repo             = "tf-envs"
-    source               = "yor"
-    yor_name             = "environment_type3"
-    yor_trace            = "54157971-cc43-4888-9179-4de6c96b5c62"
-  }
 }
