@@ -1,1 +1,1 @@
-environment_type="dev1"
+environment_type="dev2"
