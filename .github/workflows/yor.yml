@@ -26,8 +26,8 @@ jobs:
           ref: ${{ github.head_ref }}
       - name: yor
         uses: bridgecrewio/yor-action@main
-#        env:
-#          LOG_LEVEL: DEBUG
+       env:
+         LOG_LEVEL: DEBUG
         with:
           parsers: Terraform
           config_file: .tag_config.yml
