@@ -1,10 +1,23 @@
-# Deploys terraform infrastructure to a DEV environment whenever a PR is opened
-# off of main
+# Deploys terraform infrastructure to a DEV environment whenever a non-main
+# branch receives a push this allows you to continually update a branch and see
+# the terraform being applied in a dev aws account
+#
+# This is considered a test pipeline. Maning that you can use it as a status
+# check for branch protection rules. If this pipeline runs successfully and you
+# are happy with the results in the dev AWS account, then it is considered
+# successfully tested for the purpose of merging a PR.
+#
+# Note, before you can push to main, you'll need to do a PR with the working
+# branch per team git standards. But you can keep tweaking the branch with new
+# commits and pushes until you are ready to submit the PR for review
 name: DEV Terraform CI/CD Pipeline
 on:
-  pull_request:
+  push:
+    # any branch EXCEPT main
     branches: 
-      - main
+      - "**"
+      - "!main"
+    # only run if TF files changed
     paths:
       - "**.tf"
       - "**.tfvars"
@@ -15,10 +28,14 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+
+      # Setup terraform using the hashicorp action. This just install terraform
+      # into the temporary working space.
       - name: TF Setup (dev)
         uses: hashicorp/setup-terraform@v3
+
+      # Initialize terraform modules, etc. Note that it is using the AWS credentials stored in the github
+      # secrets.
       - name: TF Init (dev)
         run: terraform init
         env:
@@ -27,8 +44,13 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEV_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEV_SECRET }}
           TF_CLI_ARGS: '-var-file="env/dev.tfvars" -backend-config="bucket=${{ secrets.AWS_DEV_TFSTATE_S3 }}"'
+
+      # Validate the TF HCL syntax
       - name: TF Validate (dev)
         run: terraform validate
+
+      # TF plan. Note that it is using the AWS credentials stored in the github
+      # secrets.
       - name: TF Plan (dev)
         run: terraform plan
         env:
@@ -37,11 +59,20 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEV_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEV_SECRET }}
           TF_CLI_ARGS: '-var-file="env/dev.tfvars"'
-      - name: TF Security (dev)
-        uses: aquasecurity/tfsec-pr-commenter-action@main
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tfsec_args: --config-file .tfsec.yml
+
+      # Add comments to pull requests where tfsec checks have failed
+    #   - name: TF Security (dev)
+    #     uses: aquasecurity/tfsec-pr-commenter-action@main
+    #     with:
+    #       github_token: ${{ secrets.GITHUB_TOKEN }}
+    #       tfsec_args: --config-file .tfsec.yml
+
+      # Inject terraform details into the README.md file.
+      # Between the template markers
+      #
+      # <!-- BEGIN_TF_DOCS -->
+      #
+      # <!-- END_TF_DOCS -->
       - name: TF documentation in README.md  (dev)
         uses: terraform-docs/gh-actions@v1
         with:
@@ -49,6 +80,8 @@ jobs:
           output-file: README.md
           output-method: inject
           git-push: "true"
+
+      # Finally, apply the terraform to dev.
       - name: TF Apply  (dev)
         run: terraform apply -auto-approve
         env:
