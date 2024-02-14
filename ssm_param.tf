@@ -32,7 +32,7 @@ provider "aws" {
 resource "aws_ssm_parameter" "environment_type" {
   name        = "environment_type"
   type        = "String"
-  value       = "10" #var.environment_type
+  value       = "13" #var.environment_type
   description = "basic string  to see what terraform & GH are doing"
   tags = {
     CostCenter           = "CC5409"
