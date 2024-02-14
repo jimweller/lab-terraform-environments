@@ -3,75 +3,64 @@
 # if the github repo is configured according to standards.
 name: Terraform PROD CI/CD Pipeline
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
+  # Triggers the workflow on push or pull request events but only for the main
+  # branch and only for files that merit running terraform.
+  pull_request:
     branches: [ main ]
-#  pull_request:
-#    branches: [ main ]
-#   push:
-#     branches:
-#       - "main"
-#     paths:
-#       - "**.tf"
-#       - "**.tfvars"
-
+  push:
+    branches:
+      - "main"
+    paths:
+      - "**.tf"
+      - "**.tfvars"
 jobs:
-  runme:
-    name: run me
+  plan:
+    name: Infrastructure Jobs (prod)
     runs-on: ubuntu-latest
     steps:
-      - name: Create annotation for build error
-        run: echo "tf-prod-cicd-pr.yml"
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
 
+      - name: TF tagging (yor)
+        uses: bridgecrewio/yor-action@main
+#        env:
+#          LOG_LEVEL: DEBUG
+        with:
+          parsers: Terraform
+          config_file: .tag_config.yml
 
-# jobs:
-#   plan:
-#     name: TF Prod Apply
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout Repo
-#         uses: actions/checkout@v4
-#         with:
-#           fetch-depth: 0
-#           ref: ${{ github.head_ref }}
+      - name: TF Setup
+        uses: hashicorp/setup-terraform@v3
 
-#       - name: TF tagging (yor)
-#         uses: bridgecrewio/yor-action@main
-# #        env:
-# #          LOG_LEVEL: DEBUG
-#         with:
-#           parsers: Terraform
-#           config_file: .tag_config.yml
+      - name: Terraform Init
+        run: terraform init
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TF_ACTION_WORKING_DIR: '.'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PROD_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PROD_SECRET }}
+          TF_CLI_ARGS: '-var-file="env/prod.tfvars" -backend-config="bucket=${{ secrets.AWS_PROD_TFSTATE_S3 }}"'
 
-#       - name: TF Setup
-#         uses: hashicorp/setup-terraform@v3
+      - name: Terraform Validate
+        run: terraform validate
 
-#       - name: Terraform Init
-#         run: terraform init
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           TF_ACTION_WORKING_DIR: '.'
-#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PROD_KEY }}
-#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PROD_SECRET }}
-#           TF_CLI_ARGS: '-var-file="env/prod.tfvars" -backend-config="bucket=${{ secrets.AWS_PROD_TFSTATE_S3 }}"'
+      - name: Terraform Plan
+        run: terraform plan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TF_ACTION_WORKING_DIR: '.'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PROD_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PROD_SECRET }}
+          TF_CLI_ARGS: '-var-file="env/prod.tfvars"'
 
-#       - name: Terraform Validate
-#         run: terraform validate
-
-#       - name: Terraform Plan
-#         run: terraform plan
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           TF_ACTION_WORKING_DIR: '.'
-#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PROD_KEY }}
-#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PROD_SECRET }}
-#           TF_CLI_ARGS: '-var-file="env/prod.tfvars"'
-
-#       - name: TF Apply
-#         run: terraform apply -auto-approve
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           TF_ACTION_WORKING_DIR: '.'
-#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PROD_KEY }}
-#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PROD_SECRET }}
-#           TF_CLI_ARGS: '-var-file="env/prod.tfvars"'
+      - name: TF Apply
+        run: terraform apply -auto-approve
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TF_ACTION_WORKING_DIR: '.'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PROD_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PROD_SECRET }}
+          TF_CLI_ARGS: '-var-file="env/prod.tfvars"'
