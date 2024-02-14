@@ -2,7 +2,6 @@
 # off of main
 name: Terraform DEV CI/CD Pipeline
 on:
-  push:
   pull_request:
     branches: 
       - main
