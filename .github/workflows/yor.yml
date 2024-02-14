@@ -24,8 +24,6 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
-      - name: depth
-        run: git fetch --unshallow
       - name: yor
         uses: bridgecrewio/yor-action@main
 #        env:
