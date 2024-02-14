@@ -45,5 +45,12 @@ resource "aws_ssm_parameter" "environment_type" {
     git_repo             = "tf-envs"
     yor_trace            = "tf-envs"
     yor_name             = "environment_type"
+    CostCenter           = "CC5409"
+    CustomerName         = "Hyland Software Inc"
+    EnvironmentType      = "Production"
+    Owner                = "CPEENBL"
+    Platform             = "AWS Delivery"
+    Product              = "OnBase"
+    source               = "yor"
   }
 }
