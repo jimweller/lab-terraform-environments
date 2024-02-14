@@ -35,16 +35,6 @@ resource "aws_ssm_parameter" "environment_type" {
   value       = "1" #var.environment_type
   description = "basic string  to see what terraform & GH are doing"
   tags = {
-    jim                  = "c"
-    git_commit           = "a849091fc76afe01867d91b42914b44ff46f0148"
-    git_file             = "ssm_param.tf"
-    git_last_modified_at = "2024-02-14 05:53:14"
-    git_last_modified_by = "jim.weller@gmail.com"
-    git_modifiers        = "jim.weller"
-    git_org              = "jimweller"
-    git_repo             = "tf-envs"
-    yor_trace            = "tf-envs"
-    yor_name             = "environment_type"
     CostCenter           = "CC5409"
     CustomerName         = "Hyland Software Inc"
     EnvironmentType      = "Production"
@@ -52,5 +42,14 @@ resource "aws_ssm_parameter" "environment_type" {
     Platform             = "AWS Delivery"
     Product              = "OnBase"
     source               = "yor"
+    git_commit           = "a849091fc76afe01867d91b42914b44ff46f0148"
+    git_file             = "ssm_param.tf"
+    git_last_modified_at = "2024-02-14 05:53:14"
+    git_last_modified_by = "jim.weller@gmail.com"
+    git_modifiers        = "jim.weller"
+    git_org              = "jimweller"
+    git_repo             = "tf-envs"
+    yor_name             = "environment_type"
+    yor_trace            = "tf-envs"
   }
 }
