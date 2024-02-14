@@ -38,9 +38,10 @@ resource "aws_ssm_parameter" "environment_type" {
   type        = "String"
   value       = local.current_datetime #var.environment_type
   description = "basic string  to see what terraform & GH are doing"
-  # tags will be injected here by yor 1
+  # tags will be injected here by yor
 
   tags = {
+    ChangeMeToTest       = "1"
     CostCenter           = "CC5409"
     CustomerName         = "Hyland Software Inc"
     EnvironmentType      = "Production"
