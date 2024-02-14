@@ -20,6 +20,10 @@ terraform {
   }
 }
 
+locals {
+    current_datetime = timestamp()
+}
+
 provider "aws" {
   region = "us-west-2"
 }
@@ -32,7 +36,7 @@ variable "environment_type" {
 resource "aws_ssm_parameter" "environment_type" {
   name        = "environment_type"
   type        = "String"
-  value       = var.environment_type
+  value       = local.current_datetime #var.environment_type
   description = "basic string  to see what terraform & GH are doing"
   # tags will be injected here by yor
 }
