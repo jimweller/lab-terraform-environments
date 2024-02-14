@@ -43,7 +43,6 @@ resource "aws_ssm_parameter" "environment_type" {
     git_org              = "jimweller"
     git_repo             = "tf-envs"
     yor_trace            = "tf-envs"
-    yor_trace            = "tf-envs"
     yor_name             = "environment_type"
   }
 }
