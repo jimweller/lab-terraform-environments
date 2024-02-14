@@ -9,7 +9,9 @@ on:
 #     paths:
 #       - "**.tf"
 #       - "**.tfvars"
-# jobs:
+jobs:
+  - name: Create annotation for build error
+    run: echo "tf-dev-cicd-pr.yml"
 #   terraform:
 #     name: TF Dev Apply
 #     runs-on: ubuntu-latest
