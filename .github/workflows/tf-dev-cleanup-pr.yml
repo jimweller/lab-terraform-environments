@@ -1,9 +1,5 @@
-# Destroys terraform infrastructure in a dev environment any time that
-#
-# - a branch is deleted (that is not "main"), e.g. when a PR is merged
-#
-# - a pr is closed e.g. a PR is cancelled without merging
-#
+# Destroys terraform infrastructure in a dev environment any time that a branch
+# is deleted (that is not "main"), e.g. when a PR is merged
 name: Terraform DEV CI/CD Cleanup
 on:
   delete:
@@ -13,9 +9,6 @@ on:
     paths:
       - "**.tf"
       - "**.tfvars"
-  pull_request:
-    types: 
-      - closed
 jobs:
   tf-dev-cleanup-pr:
     name: TF Dev Destroy
