@@ -6,14 +6,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
-#  pull_request:
-#    branches: [ main ]
-#   push:
-#     branches:
-#       - "main"
-#     paths:
-#       - "**.tf"
-#       - "**.tfvars"
 jobs:
   plan:
     name: yor
@@ -26,8 +18,8 @@ jobs:
           ref: ${{ github.head_ref }}
       - name: yor
         uses: bridgecrewio/yor-action@main
-        env:
-          LOG_LEVEL: DEBUG
+        # env:
+        #   LOG_LEVEL: DEBUG
         with:
           parsers: Terraform
           config_file: .tag_config.yml
