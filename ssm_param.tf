@@ -29,7 +29,7 @@ provider "aws" {
 #  default = "nothing"
 #}
 
-resource "aws_ssm_parameter" "environment_type" {
+resource "aws_ssm_parameter" "environment_type1" {
   name        = "environment_type"
   type        = "String"
   value       = "13" #var.environment_type
