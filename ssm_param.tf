@@ -30,7 +30,7 @@ provider "aws" {
 #}
 
 resource "aws_ssm_parameter" "environment_type" {
-  name        = "environment_type1"
+  name        = "environment_type2"
   type        = "String"
   value       = "13" #var.environment_type
   description = "basic string  to see what terraform & GH are doing"
@@ -41,9 +41,9 @@ resource "aws_ssm_parameter" "environment_type" {
     Owner                = "CPEENBL"
     Platform             = "AWS Delivery"
     Product              = "OnBase"
-    git_commit           = "ea5361d3586aa08145d319cc460f169f3cbd8adf"
+    git_commit           = "c244753caf8ace991f06e6a3182b22a41e026223"
     git_file             = "ssm_param.tf"
-    git_last_modified_at = "2024-02-14 07:11:53"
+    git_last_modified_at = "2024-02-14 07:15:37"
     git_last_modified_by = "jim.weller@gmail.com"
     git_modifiers        = "jim.weller"
     git_org              = "jimweller"
