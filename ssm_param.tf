@@ -30,7 +30,7 @@ variable "environment_type" {
 }
 
 resource "aws_ssm_parameter" "environment_type" {
-  name        = "environment_type26"
+  name        = "environment_type27"
   type        = "String"
   value       = var.environment_type
   description = "basic string  to see what terraform & GH are doing"
