@@ -36,10 +36,10 @@ resource "aws_ssm_parameter" "environment_type" {
   description = "basic string  to see what terraform & GH are doing"
   tags = {
     jim                  = "c"
-    git_commit           = "b97577506081884f64972f8e13e9267e1b6f5b28"
+    git_commit           = "5dcd6066b50c7847fb7c67792c360e873c873c91"
     git_file             = "main.tf"
-    git_last_modified_at = "2024-02-14 04:58:19"
-    git_last_modified_by = "jim.weller@gmail.com"
+    git_last_modified_at = "2024-02-14 04:59:29"
+    git_last_modified_by = "31997291+jimweller@users.noreply.github.com"
     git_modifiers        = "31997291+jimweller/jim.weller"
     git_org              = "jimweller"
     git_repo             = "tf-envs"
